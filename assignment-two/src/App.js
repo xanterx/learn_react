@@ -31,10 +31,6 @@ class App extends Component {
     this.setState({string:objArr});
   }
   
-  calcValue=()=>{
-    return ;
-  }
-
   render() {
     return (
       <div className="App">
