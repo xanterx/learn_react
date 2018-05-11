@@ -5,14 +5,36 @@ import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
 class App extends Component {
-  state = {
-    person:[
-      {id: '1', name: 'Goku', age: 56 },
-      {id: '2', name: 'Vegeta', age: 40 },
-      {id: '3', name:'Gohan', age:12}
-    ],
-    showPerson : false
-  };
+  constructor(props){
+    super(props);
+    console.log('[App.js] Inside Constructor',props);
+    this.state = {
+      person:[
+        {id: '1', name: 'Goku', age: 56 },
+        {id: '2', name: 'Vegeta', age: 40 },
+        {id: '3', name:'Gohan', age:12}
+      ],
+      showPerson : false
+    };
+  }
+
+  componentWillMount(){
+    console.log('[App.js] Inside Component Will Mount');
+  }
+
+  componentDidMount(){
+    console.log('[App.js] Inside Component Did Mount');
+    
+  }
+
+  // state = {
+  //   person:[
+  //     {id: '1', name: 'Goku', age: 56 },
+  //     {id: '2', name: 'Vegeta', age: 40 },
+  //     {id: '3', name:'Gohan', age:12}
+  //   ],
+  //   showPerson : false
+  // };
 
   deletePerson= (personIndex) => {
     // const person = this.state.person.slice();
@@ -48,6 +70,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()');
     let person = null;
 
     if(this.state.showPerson){
