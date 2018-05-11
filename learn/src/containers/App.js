@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person';
+import classes from './App.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+// import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
 class App extends Component {
   state = {
@@ -10,7 +12,7 @@ class App extends Component {
       {id: '3', name:'Gohan', age:12}
     ],
     showPerson : false
-  }
+  };
 
   deletePerson= (personIndex) => {
     // const person = this.state.person.slice();
@@ -32,7 +34,7 @@ class App extends Component {
     newPerson.name = event.target.value;
 
     const persons = [...this.state.person];
-    persons[pi]=newPerson
+    persons[pi]=newPerson;
 
 
     this.setState({
@@ -46,50 +48,27 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color:'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-
-    };
-
     let person = null;
 
     if(this.state.showPerson){
       person = (
         <div>
-          {this.state.person.map((per, index)=>{
-            return <Person 
-                click={this.deletePerson.bind(this,index)}
-                name={per.name}
-                transform={(event) => this.transform(event,per.id)}
-                age={per.age}
-                key={per.id}>
-              </Person>
-          })}
+          <Persons 
+            person={this.state.person}
+            clicked = {this.deletePerson}
+            transform = {this.transform}
+          />
         </div>
       );
-      style.backgroundColor = 'red';
-    }
 
-    let classes = [];
-    if (this.state.person.length <= 2){
-      classes.push('red');
-    }
-    if (this.state.person.length <= 1){
-      classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>I am react app</h1>
-        <p className={classes.join(' ')}>Kamehame haaa....!!!</p>
-        <button
-          style={style} 
-          onClick={this.togglePerson}>Toggle Person</button>
+      <div className={classes.App}>
+        <Cockpit 
+          showPerson={this.state.showPerson}
+          person={this.state.person}
+          clicked={this.togglePerson} />
         {person}
       </div>
     //return React.createElement('div',{className:'App'},React.createElement('h1',null,'holla bitches')
