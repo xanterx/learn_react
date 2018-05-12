@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props){
     super(props);
     console.log('[App.js] Inside Constructor',props);
@@ -25,6 +25,24 @@ class App extends Component {
   componentDidMount(){
     console.log('[App.js] Inside Component Did Mount');
     
+  }
+
+  // shouldComponentUpdate(nextProps,nextState){
+  //   console.log('[Update App.js] Inside Component Should Update',nextProps,nextState);
+  //   return nextState.showPerson !== this.state.showPerson ||
+  //    nextState.person !== this.state.person;
+  // }
+
+  componentWillUpdate(nextProps,nextState){
+    console.log('[Update App.js] Inside Component Will Update',nextProps,nextState);    
+  }
+
+  componentDidUpdate(){
+    console.log('[Update App.js] Inside Component Did Update');    
+  }
+  
+  componentWillUnmount() {
+    console.log('[App.js] Inside Component Wil  UnMount');
   }
 
   // state = {
@@ -88,6 +106,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        <button onClick={() => {this.setState({showPerson:true});}}>Show Person</button>
         <Cockpit 
           appTitle={this.props.title}
           showPerson={this.state.showPerson}
