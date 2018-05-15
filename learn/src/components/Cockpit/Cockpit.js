@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from './Cockpit.css';
+// import Aux from '../../hoc/Aux'; Also <> but not supported by Linters
 
 const cockpit=(props)=>{
   const assignedclasses = [];
-  let btnClass = '';
+  let btnClass = classes.Button;
   if(props.showPerson){
-    btnClass = classes.Red;
+    btnClass = [classes.Button,classes.Red].join(' ');
   }
 
   if (props.person.length <= 2){
@@ -14,15 +15,16 @@ const cockpit=(props)=>{
   if (props.person.length <= 1){
     assignedclasses.push(classes.bold);
   }
+  const REACT_VERSION = React.version;
 
   return(
-    <div className={classes.Cockpit}>
-      <h1>{props.appTitle}</h1>
+    <React.Fragment>
+      <h1>{props.appTitle}-{REACT_VERSION}</h1>
       <p className={assignedclasses.join(' ')}>Kamehame haaa....!!!</p>
       <button
         className={btnClass}
         onClick={props.clicked}>Toggle Person</button>
-    </div>
+    </React.Fragment>
   );
 };
 
