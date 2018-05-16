@@ -20,6 +20,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react/display-name": [2],
         'no-console': 'off',
         "no-undef": "off",
         "react/prop-types": [
@@ -29,19 +30,19 @@ module.exports = {
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "indent": [
-            "error",
+            "warn",
             2
         ],
         "linebreak-style": [
-            "error",
+            "warn",
             "unix"
         ],
         "quotes": [
-            "error",
+            "warn",
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ]
     }

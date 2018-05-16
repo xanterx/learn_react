@@ -3,6 +3,7 @@ import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
+import WithClass from '../hoc/WithClass';
 
 class App extends PureComponent {
   constructor(props){
@@ -14,7 +15,8 @@ class App extends PureComponent {
         {id: '2', name: 'Vegeta', age: 40 },
         {id: '3', name:'Gohan', age:12}
       ],
-      showPerson : false
+      showPerson : false,
+      toggleCounter : 0
     };
   }
 
@@ -84,7 +86,12 @@ class App extends PureComponent {
 
   togglePerson = () => {
     const doesShow = this.state.showPerson;
-    this.setState({showPerson:!doesShow});
+    this.setState( (prevState) => {
+      return{
+        showPerson:!doesShow,
+        toggleCounter : prevState.toggleCounter + 1
+      };
+    });
   }
 
   render() {
@@ -105,17 +112,18 @@ class App extends PureComponent {
     }
 
     return (
-      <div className={classes.App}>
+      <WithClass classes = {classes.App}>
         <button onClick={() => {this.setState({showPerson:true});}}>Show Person</button>
         <Cockpit 
           appTitle={this.props.title}
           showPerson={this.state.showPerson}
           person={this.state.person}
-          clicked={this.togglePerson} />
+          clicked={this.togglePerson}
+          counter={this.state.toggleCounter} />
         {person}
-      </div>
-    //return React.createElement('div',{className:'App'},React.createElement('h1',null,'holla bitches')
+      </WithClass>
     );
+    //return React.createElement('div',{className:'App'},React.createElement('h1',null,'holla bitches')
   }
 }
 

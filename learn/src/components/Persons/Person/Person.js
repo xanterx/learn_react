@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import st from './Person.css';
+import WithClass from '../../../hoc/WithClass';
+import PropTypes from 'prop-types';
 
 class Person extends Component{
   constructor(props){
@@ -17,13 +19,20 @@ class Person extends Component{
   render(){
     console.log('[Per.js] Inside Render');    
     return (
-      <div className={st.Person}>
+      <WithClass classes={st.Person}>
         <p> I am funcking {this.props.name}, i am {this.props.age} year old</p>
         <p onClick={this.props.click}>{(this.props.age)*2}</p>
         <input type="text" onChange={this.props.transform} value={this.props.name} />
-      </div>
+      </WithClass>
     );
   }
 }
+
+Person.propTypes = {
+  click : PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  transform:  PropTypes.func
+};
 
 export default Person;

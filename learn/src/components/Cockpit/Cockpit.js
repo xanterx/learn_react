@@ -21,6 +21,7 @@ const cockpit=(props)=>{
     <React.Fragment>
       <h1>{props.appTitle}-{REACT_VERSION}</h1>
       <p className={assignedclasses.join(' ')}>Kamehame haaa....!!!</p>
+      <p>{props.counter}</p>
       <button
         className={btnClass}
         onClick={props.clicked}>Toggle Person</button>
