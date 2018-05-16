@@ -5,6 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 import WithClass from '../hoc/WithClass';
 
+export const AuthContext = React.createContext(false);
 class App extends PureComponent {
   constructor(props){
     super(props);
@@ -16,7 +17,8 @@ class App extends PureComponent {
         {id: '3', name:'Gohan', age:12}
       ],
       showPerson : false,
-      toggleCounter : 0
+      toggleCounter : 0,
+      authenticated : false
     };
   }
 
@@ -35,17 +37,26 @@ class App extends PureComponent {
   //    nextState.person !== this.state.person;
   // }
 
-  componentWillUpdate(nextProps,nextState){
-    console.log('[Update App.js] Inside Component Will Update',nextProps,nextState);    
+  // componentWillUpdate(nextProps,nextState){
+  //   console.log('[Update App.js] Inside Component Will Update',nextProps,nextState);
+  // }
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    console.log('[Update App.js] Inside Derived State From Props',nextProps,prevState);
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate(){
+    console.log('[Update App.js] Inside getSnapshotBeforeUpdate');
   }
 
   componentDidUpdate(){
     console.log('[Update App.js] Inside Component Did Update');    
   }
   
-  componentWillUnmount() {
-    console.log('[App.js] Inside Component Wil  UnMount');
-  }
+  // componentWillUnmount() {
+  //   console.log('[App.js] Inside Component Wil  UnMount');
+  // }
 
   // state = {
   //   person:[
@@ -94,6 +105,10 @@ class App extends PureComponent {
     });
   }
 
+  loginHandeler = () => {
+    this.setState({authenticated:true});
+  }
+
   render() {
     console.log('[App.js] Inside render()');
     let person = null;
@@ -119,8 +134,9 @@ class App extends PureComponent {
           showPerson={this.state.showPerson}
           person={this.state.person}
           clicked={this.togglePerson}
-          counter={this.state.toggleCounter} />
-        {person}
+          counter={this.state.toggleCounter}
+          login={this.loginHandeler} />
+        <AuthContext.Provider value = {this.state.authenticated}>{person}</AuthContext.Provider>
       </WithClass>
     );
     //return React.createElement('div',{className:'App'},React.createElement('h1',null,'holla bitches')

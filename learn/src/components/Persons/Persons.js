@@ -13,6 +13,7 @@ class Persons extends PureComponent {
 
   componentDidMount(){
     console.log('[Persons.js] Inside Component Did Mount');
+    // this.lastPersonRef.focus();
   }
   
   componentWillReceiveProps(nextProps){
@@ -46,7 +47,9 @@ class Persons extends PureComponent {
       return  <Person 
         click={this.props.clicked.bind(this.props,index)}
         name={per.name}
+        position = {index}
         transform={(event) => this.props.transform(event,per.id)}
+        // ref={this.lastPersonRef}
         age={per.age}
         key={per.id}>
       </Person>;
